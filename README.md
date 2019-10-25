@@ -3,7 +3,7 @@
 
 Consulta Única ofrece su API de consulta de CURP para realizar consultas hacia [RENAPO](https://www.gob.mx/segob/renapo).
 
-Para empezar lo primero es adquirir una **API_KEY** registrandose en el siguiente [enlace](https://consultaunica.mx/registro),y adquirir un plan mensual que se ajuste a sus medidas o elegir la prueba gratuita.
+Para empezar lo primero es adquirir una **API_KEY**, actualmente (Octubre 2019) solamente vía [correo electrónico](mailto:contacta.consulta.unica@gmail.com) otorgamos claves, es posible pedir una clave de prueba gratuita o adquirir un plan mensual que se ajuste a sus medidas (ver los paquetes y precios más abajo).
 
 ## Descripción
 
