@@ -79,9 +79,27 @@ print(code)
 # 200
 if code == 200:
     print(response.json())
-# {'code': 200, 'renapo': [['CURP', 'LOOA531113HTCPBN07'], ['Nombre(s)', 'ANDRES MANUEL'], ['Primer apellido', 'LOPEZ'], ['Segundo apellido', 'OBRADOR'], ['Sexo', 'HOMBRE'], ['Fecha de nacimiento', '13/11/1953'], ['Nacionalidad', 'MEXICO'], ['Entidad de nacimiento', 'TABASCO'], ['Documento probatorio', 'ACTA DE NACIMIENTO'], ['Entidad', '27 - TABASCO'], ['Municipio', '012 - MACUSPANA'], ['Año', '1953'], ['Número de acta', '01642'], ['Históricas:', '']], 'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf', 'restantes': 9}
-
-
+# {
+#     'code': 200,
+#     'renapo': [
+#         ['CURP', 'LOOA531113HTCPBN07'],
+#         ['Nombre(s)', 'ANDRES MANUEL'],
+#         ['Primer apellido', 'LOPEZ'],
+#         ['Segundo apellido', 'OBRADOR'],
+#         ['Sexo', 'HOMBRE'],
+#         ['Fecha de nacimiento', '13/11/1953'],
+#         ['Nacionalidad', 'MEXICO'],
+#         ['Entidad de nacimiento', 'TABASCO'],
+#         ['Documento probatorio', 'ACTA DE NACIMIENTO'],
+#         ['Entidad', '27 - TABASCO'],
+#         ['Municipio', '012 - MACUSPANA'],
+#         ['Año', '1953'],
+#         ['Número de acta', '01642'],
+#         ['Históricas:', '']
+#     ],
+#     'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf',
+#     'restantes': 9
+# }
 ```
 
 - Consulta de ejemplo con datos utilizando cURL en Ubuntu:
