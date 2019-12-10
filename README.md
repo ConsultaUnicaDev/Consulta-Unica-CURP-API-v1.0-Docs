@@ -3,7 +3,7 @@
 
 Consulta Única ofrece su API de consulta de CURP para realizar consultas hacia [RENAPO](https://www.gob.mx/segob/renapo).
 
-Para empezar lo primero es adquirir una **API_KEY**, actualmente (Octubre 2019) solamente vía [correo electrónico](mailto:contacta.consulta.unica@gmail.com) otorgamos claves, es posible pedir una clave de prueba gratuita o adquirir un plan mensual que se ajuste a sus medidas (ver los paquetes y precios más abajo).
+Para empezar lo primero es adquirir una **API_KEY**, actualmente (Diciembre 2019) solamente vía [correo electrónico](mailto:contacta.consulta.unica@gmail.com) otorgamos claves, es posible pedir una clave de prueba gratuita o adquirir un plan mensual que se ajuste a sus medidas (ver los paquetes y precios más abajo).
 
 ## Descripción
 
@@ -19,6 +19,7 @@ Parámetros:
 | Campo | Descripción | Obligatorio |
 | ------ | ------ | ------ |
 | api_key | Clave API de 56 carácteres de largo) | Si |
+| pdf | Enviar `false` para **no** descargar el PDF (`true` por defecto) | No |
 | curp | CURP de 18 dígitos | No * |
 | nombre | Nombre(s) de la persona | No ° |
 | paterno | Apellido paterno de la persona | No ° |
@@ -30,6 +31,8 @@ Parámetros:
 \* Obligatoria si no se ingresaron más datos.
 
 ° Opcional si se ingreso CURP.
+
+**Nota**: La bandera `pdf` se encuentra en `true` por defecto, no hay necesidad de incluirla en caso de querer descargar el PDF. Sin embargo, marcarla como `false` hará que la consulta sea más rápida.
 
 ## Ejemplos
 
@@ -59,7 +62,7 @@ Ejemplo de muestra de parámetros JSON:
 
 ```sh
 $ curl -d '{"api_key": "<AQUI-TU-API-KEY>", "curp": "LOOA531113HTCPBN07"}' -H "Content-Type: application/json" -X POST https://consultaunica.mx/api/v1.0/curp
-{"code":200,"renapo":[["CURP","LOOA531113HTCPBN07"],["Nombre(s)","ANDRES MANUEL"],["Primer apellido","LOPEZ"],["Segundo apellido","OBRADOR"],["Sexo","HOMBRE"],["Fecha de nacimiento","13/11/1953"],["Nacionalidad","MEXICO"],["Entidad de nacimiento","TABASCO"],["Documento probatorio","ACTA DE NACIMIENTO"],["Entidad","27 - TABASCO"],["Municipio","012 - MACUSPANA"],["A\u00f1o","1953"],["N\u00famero de acta","01642"],["Hist\u00f3ricas:",""]],"ruta_pdf":"https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf", "restantes": 9}
+{"code":200,"renapo":{"curp":"LOOA531113HTCPBN07","data_documento_probatorio":{"anio_registro":"1953","entidad_registro":"TABASCO","id_entidad_registro":"27","id_municipio_registro":"012","municipio_registro":"MACUSPANA","numero_acta":"01642"},"historicas":[""],"documento_probatorio":"ACTA DE NACIMIENTO","entidad_nacimiento":"TABASCO","fecha_nacimiento":"13/11/1953","materno":"OBRADOR","nacionalidad":"MEXICO","nombre":"ANDRES MANUEL","paterno":"LOPEZ","sexo":"HOMBRE"},"restantes":4,"ruta_pdf":"https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf"}
 ```
 
 - Consulta de ejemplo con CURP utilizando Requests en Python 3.7:
@@ -79,34 +82,39 @@ print(code)
 # 200
 if code == 200:
     print(response.json())
-# {
-#     'code': 200,
-#     'renapo': [
-#         ['CURP', 'LOOA531113HTCPBN07'],
-#         ['Nombre(s)', 'ANDRES MANUEL'],
-#         ['Primer apellido', 'LOPEZ'],
-#         ['Segundo apellido', 'OBRADOR'],
-#         ['Sexo', 'HOMBRE'],
-#         ['Fecha de nacimiento', '13/11/1953'],
-#         ['Nacionalidad', 'MEXICO'],
-#         ['Entidad de nacimiento', 'TABASCO'],
-#         ['Documento probatorio', 'ACTA DE NACIMIENTO'],
-#         ['Entidad', '27 - TABASCO'],
-#         ['Municipio', '012 - MACUSPANA'],
-#         ['Año', '1953'],
-#         ['Número de acta', '01642'],
-#         ['Históricas:', '']
-#     ],
-#     'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf',
-#     'restantes': 9
-# }
+#   {
+#   'code': 200,
+#   'renapo': {
+#       'curp': 'LOOA531113HTCPBN07',
+#       'nombre': 'ANDRES MANUEL',
+#       'paterno': 'LOPEZ',
+#       'materno': 'OBRADOR',
+#       'fecha_nacimiento': '13/11/1953',
+#       'sexo': 'HOMBRE'
+#       'entidad_nacimiento': 'TABASCO',
+#       'nacionalidad': 'MEXICO',
+#       'documento_probatorio': 'ACTA DE NACIMIENTO',
+#       'data_documento_probatorio': {
+#           'anio_registro': '1953',
+#           'entidad_registro': 'TABASCO',
+#           'historicas': [''],
+#           'id_entidad_registro': '27',
+#           'id_municipio_registro': '012',
+#           'municipio_registro': 'MACUSPANA',
+#           'numero_acta': '01642'
+#       }
+#   },
+#   'restantes': 4,
+#   'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf'
+#   }
+
 ```
 
 - Consulta de ejemplo con datos utilizando cURL en Ubuntu:
 
 ```sh
 $ curl -d '{"api_key": "<AQUI-TU-API-KEY>", "nombre": "ANDRES MANUEL", "paterno": "LOPEZ", "materno": "OBRADOR", "sexo": "H", "fecha_nacimiento": "13/11/1953", "entidad_nacimiento": "TC"}' -H "Content-Type: application/json" -X POST https://consultaunica.mx/api/v1.0/curp
-{"code":200,"renapo":[["CURP","LOOA531113HTCPBN07"],["Nombre(s)","ANDRES MANUEL"],["Primer apellido","LOPEZ"],["Segundo apellido","OBRADOR"],["Sexo","HOMBRE"],["Fecha de nacimiento","13/11/1953"],["Nacionalidad","MEXICO"],["Entidad de nacimiento","TABASCO"],["Documento probatorio","ACTA DE NACIMIENTO"],["Entidad","27 - TABASCO"],["Municipio","012 - MACUSPANA"],["A\u00f1o","1953"],["N\u00famero de acta","01642"],["Hist\u00f3ricas:",""]],"ruta_pdf":"https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf", "restantes": 9}
+{"code":200,"renapo":{"curp":"LOOA531113HTCPBN07","data_documento_probatorio":{"anio_registro":"1953","entidad_registro":"TABASCO","id_entidad_registro":"27","id_municipio_registro":"012","municipio_registro":"MACUSPANA","numero_acta":"01642"},"historicas":[""],"documento_probatorio":"ACTA DE NACIMIENTO","entidad_nacimiento":"TABASCO","fecha_nacimiento":"13/11/1953","materno":"OBRADOR","nacionalidad":"MEXICO","nombre":"ANDRES MANUEL","paterno":"LOPEZ","sexo":"HOMBRE"},"restantes":4,"ruta_pdf":"https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf"}
 ```
 
 - Consulta de ejemplo con datos utilizando Requests en Python 3.7:
@@ -131,27 +139,31 @@ print(code)
 # 200
 if code == 200:
     print(response.json())
-# {
-#     'code': 200,
-#     'renapo': [
-#         ['CURP', 'LOOA531113HTCPBN07'],
-#         ['Nombre(s)', 'ANDRES MANUEL'],
-#         ['Primer apellido', 'LOPEZ'],
-#         ['Segundo apellido', 'OBRADOR'],
-#         ['Sexo', 'HOMBRE'],
-#         ['Fecha de nacimiento', '13/11/1953'],
-#         ['Nacionalidad', 'MEXICO'],
-#         ['Entidad de nacimiento', 'TABASCO'],
-#         ['Documento probatorio', 'ACTA DE NACIMIENTO'],
-#         ['Entidad', '27 - TABASCO'],
-#         ['Municipio', '012 - MACUSPANA'],
-#         ['Año', '1953'],
-#         ['Número de acta', '01642'],
-#         ['Históricas:', '']
-#     ],
-#     'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf',
-#     'restantes': 9
-# }
+#   {
+#   'code': 200,
+#   'renapo': {
+#       'curp': 'LOOA531113HTCPBN07',
+#       'nombre': 'ANDRES MANUEL',
+#       'paterno': 'LOPEZ',
+#       'materno': 'OBRADOR',
+#       'fecha_nacimiento': '13/11/1953',
+#       'sexo': 'HOMBRE'
+#       'entidad_nacimiento': 'TABASCO',
+#       'nacionalidad': 'MEXICO',
+#       'documento_probatorio': 'ACTA DE NACIMIENTO',
+#       'data_documento_probatorio': {
+#           'anio_registro': '1953',
+#           'entidad_registro': 'TABASCO',
+#           'historicas': [''],
+#           'id_entidad_registro': '27',
+#           'id_municipio_registro': '012',
+#           'municipio_registro': 'MACUSPANA',
+#           'numero_acta': '01642'
+#       }
+#   },
+#   'restantes': 4,
+#   'ruta_pdf': 'https://consultaunica.mx/static/pdf/curp/LOOA531113HTCPBN07_<TOKEN>.pdf'
+#   }
 ```
 
 ### Respuestas
@@ -179,7 +191,7 @@ Todos los códigos diferentes al 200 recibirán solamente 3 parámetros:
 {
   "code": "204",
   "mensaje": "Sin resultados",
-  "restantes": 9
+  "restantes": 4
 }
 ```
 
