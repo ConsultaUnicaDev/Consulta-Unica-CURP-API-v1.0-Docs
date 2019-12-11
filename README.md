@@ -14,6 +14,8 @@ Existen dos formas de realizar consultas hacia RENAPO:
 
 URL de la API: <https://consultaunica.mx/api/v1.0/curp>
 
+URL para probar la API: <https://consultaunica.mx/api>
+
 Parámetros:
 
 | Campo | Descripción | Obligatorio |
