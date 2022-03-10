@@ -1,13 +1,13 @@
 
 # Consulta Única - CURP API v2.0 Documentación
 
-## Actualizado Enero 2022
+## Actualizado Marzo 2022
 
 Hola 👋🏻,
 
-🔑 Hemos movido nuestra documentación aquí: https://documenter.getpostman.com/view/14310515/UVC5Dmiz
+🔑 Hemos movido nuestra documentación aquí: https://bit.ly/cu-docs-gl
 
-📦 Ademas ahora contamos con 5 servicios y no requieres de Api Key para probar pero el limite es de 10 consultas diarias:
+📦 Ademas ahora contamos con 5 servicios y no requieres de Api Key para probar pero el limite es de 5 consultas diarias:
 
 - [Validación de RFC](https://consultaunica.mx/consultas-automatizadas-para-rfc)
 - [Consulta de coche robado (REPUVE)](https://consultaunica.mx/consultas-automatizadas-para-repuve)
@@ -16,4 +16,6 @@ Hola 👋🏻,
 
 ## Dudas y opiniones
 
-📧 Correo: contacta.consulta.unica@gmail.com
+- Mediante correo electrónico: [contacta.consulta.unica@gmail.com](mailto:contacta.consulta.unica@gmail.com)
+- WhatsApp: <https://bit.ly/cu-wa>
+- Telegram: <https://bit.ly/cu-tg>
